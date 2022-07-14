@@ -35,3 +35,10 @@ All commands should provide output indicating whether or not they succeeded.
   Instructs the robot to rotate 90° clockwise.
 * REPORT
   Outputs the robot's current location on the tabletop and the direction it is facing.
+
+## How To Run
+### Locally
+* clone the project (you should already have latest npm and Angular installed in your local)
+* cd in to ai-media-toy-robot-coding-challenge folder
+* run `npm install` cmd from your terminal
+* run `ng s --o` cmd from your terminal and it should open the browser once app is ready
