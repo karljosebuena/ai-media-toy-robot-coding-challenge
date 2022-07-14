@@ -33,8 +33,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.initFormBuilder();
     this.initTableItems();
 
-    // console.log(this.tableItems);
-
     this.setPositionFormSubscription = this.setPositionForm
       .valueChanges
       .subscribe(
