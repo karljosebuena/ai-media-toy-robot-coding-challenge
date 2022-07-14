@@ -1,0 +1,70 @@
+.app-component__header {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.app-component__body {
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .robot-default {
+      margin-top: 2px;
+      margin-left: 2px;
+      width: 110px;
+      height: 110px;
+      background-color: skyblue;
+    }
+
+    .robot-face-north {
+      background-image: url(https://www.kindpng.com/picc/m/29-298485_up-arrow-free-png-image-up-arrow-image.png);
+      background-size: 110px 110px;
+    }
+
+    .robot-face-south {
+      background-image: url(http://www.clipartbest.com/cliparts/eTM/k95/eTMk95oxc.jpg);
+      background-size: 110px 110px;
+    }
+
+    .robot-face-west {
+      background-image: url(https://i.pinimg.com/564x/51/f1/6b/51f16b2e14e2a0d4e7e7e05d1f7cda4c.jpg);
+      background-size: 110px 110px;
+    }
+
+    .robot-face-east {
+      background-image: url(https://i.pinimg.com/564x/4f/99/3d/4f993d6aa328e341d022d3b4930cd43c.jpg);
+      background-size: 110px 110px;
+    }
+  }
+}
+
+.app-component__footer {
+  button {
+    text-transform: uppercase;
+  }
+  .app-component__footer_set_initial_posiion {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+
+    .mat-form-field {
+      width: 160px !important;
+    }
+    button {
+      margin-top: -18px;
+      height: 52px;
+    }
+  }
+  .app-component__footer_robot-commands {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    button {
+      height: 52px;
+      width: 130px;
+    }
+  }
+}
