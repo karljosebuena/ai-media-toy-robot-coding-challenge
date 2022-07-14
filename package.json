@@ -6,6 +6,9 @@
     "email": "karljosebuena@gmail.com",
     "url": "https://karljosebuena-resume.herokuapp.com/"
   },
+  "engines": {
+    "node": "12.18.2"
+  } ,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
