@@ -32,12 +32,13 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initFormBuilder();
     this.initTableItems();
-    console.log(this.tableItems);
+
+    // console.log(this.tableItems);
 
     this.setPositionFormSubscription = this.setPositionForm
       .valueChanges
       .subscribe(
-        position => {
+        () => {
           if (this.setPositionForm.valid) {
             this.moveRobotToNewPosition();
           }
@@ -84,13 +85,11 @@ export class AppComponent implements OnInit, OnDestroy {
     } = this.setPositionForm.value;
 
     if (positionX < 1 || positionX > 5 || positionY < 1 || positionY > 5) {
-      return this.openSnackBar();
+      return this.openSnackBar('Coordinates out of bounds!', 'Error');
     }
 
     // remove robot's previous position
     this.clearRobotPreviousPosition();
-
-    console.log(`Robot moved to starting position ${positionX}x ${positionY}y of ${startingDirection}.`, this.setPositionForm.valid);
 
     // let's mark starting postion in tabletop
     let robotDirection = '';
@@ -130,8 +129,8 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  private openSnackBar() {
-    this._snackBar.open('Coordinates out of bounds!', 'Error', {
+  private openSnackBar(message: string, type: string) {
+    this._snackBar.open(message, type, {
       horizontalPosition: 'center',
       verticalPosition: 'top',
       duration: 3000
@@ -139,55 +138,107 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   move() {
+    if (this.setPositionForm.valid) {
+      const {
+        positionX,
+        positionY,
+        startingDirection,
+      } = this.setPositionForm.value;
+
+      const errorMessage = 'Robot will fall off the grid!';
+      switch (startingDirection) {
+        case 'North':
+          if (positionY - 1 < 1) {
+            return this.openSnackBar(errorMessage, 'Error');
+          }
+          this.setPositionForm.controls.positionY.setValue(positionY - 1);
+          break;
+        case 'West':
+          if (positionX - 1 < 1) {
+            return this.openSnackBar(errorMessage, 'Error');
+          }
+          this.setPositionForm.controls.positionX.setValue(positionX - 1);
+          break;
+        case 'East':
+          if (positionX + 1 > 5) {
+            return this.openSnackBar(errorMessage, 'Error');
+          }
+          this.setPositionForm.controls.positionX.setValue(positionX + 1);
+          break;
+        case 'South':
+          if (positionY + 1 > 5) {
+            return this.openSnackBar(errorMessage, 'Error');
+          }
+          this.setPositionForm.controls.positionY.setValue(positionY + 1);
+          break;
+        default:
+          console.log({ startingDirection });
+          break;
+      }
+    }
+  }
+
+  left() {
+    if (this.setPositionForm.valid) {
+      const {
+        startingDirection,
+      } = this.setPositionForm.value;
+
+      switch (startingDirection) {
+        case 'North':
+          this.setPositionForm.controls.startingDirection.setValue('West');
+          break;
+        case 'West':
+          this.setPositionForm.controls.startingDirection.setValue('South');
+          break;
+        case 'South':
+          this.setPositionForm.controls.startingDirection.setValue('East');
+          break;
+        case 'East':
+          this.setPositionForm.controls.startingDirection.setValue('North');
+          break;
+        default:
+          console.log({ startingDirection });
+          break;
+      }
+    }
+  }
+
+  right() {
     const {
-      positionX,
-      positionY,
       startingDirection,
     } = this.setPositionForm.value;
 
-    switch (startingDirection) {
-      case 'North':
-        if (positionY - 1 < 1) {
-          return this.openSnackBar();
-        }
-        this.setPositionForm.controls.positionY.setValue(positionY - 1);
-        break;
-      case 'West':
-        if (positionX - 1 < 1) {
-          return this.openSnackBar();
-        }
-        this.setPositionForm.controls.positionX.setValue(positionX - 1);
-        break;
-      case 'East':
-        if (positionX + 1 > 5) {
-          return this.openSnackBar();
-        }
-        this.setPositionForm.controls.positionX.setValue(positionX + 1);
-        break;
-      case 'South':
-        if (positionY + 1 > 5) {
-          return this.openSnackBar();
-        }
-        this.setPositionForm.controls.positionY.setValue(positionY + 1);
-        break;
-      default:
-        console.log({ startingDirection });
-        break;
+    if (this.setPositionForm.valid) {
+      switch (startingDirection) {
+        case 'North':
+          this.setPositionForm.controls.startingDirection.setValue('East');
+          break;
+        case 'East':
+          this.setPositionForm.controls.startingDirection.setValue('South');
+          break;
+        case 'South':
+          this.setPositionForm.controls.startingDirection.setValue('West');
+          break;
+        case 'West':
+          this.setPositionForm.controls.startingDirection.setValue('North');
+          break;
+        default:
+          console.log({ startingDirection });
+          break;
+      }
     }
-
-
-    console.log(this.setPositionForm.value);
   }
 
-  // left() {
+  report() {
+    if (this.setPositionForm.valid) {
+      const {
+        positionX,
+        positionY,
+        startingDirection,
+      } = this.setPositionForm.value;
 
-  // }
-
-  // right() {
-
-  // }
-
-  // report() {
-
-  // }
+      this.openSnackBar(`Robot is located at ${positionX}x ${positionY}y of ${startingDirection}.`, 'Success')
+    }
+  }
 }

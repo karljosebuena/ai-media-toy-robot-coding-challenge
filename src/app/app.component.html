@@ -77,13 +77,12 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <!-- <button mat-raised-button color="primary">Set Position</button> -->
   </form>
 
   <div class="app-component__footer_robot-commands">
     <button mat-raised-button color="warn" (click)="move()">Move</button>
-    <button mat-raised-button color="warn">Left</button>
-    <button mat-raised-button color="warn">Right</button>
-    <button mat-raised-button color="accent">Report</button>
+    <button mat-raised-button color="warn" (click)="left()">Left</button>
+    <button mat-raised-button color="warn" (click)="right()">Right</button>
+    <button mat-raised-button color="accent" (click)="report()">Report</button>
   </div>
 </div>
