@@ -50,6 +50,3 @@ All commands should provide output indicating whether or not they succeeded.
 * run `docker build -t karljosebuena/ai-media-toy-robot-coding-challenge:latest .` cmd from your terminal
 * run `docker run  -d -p 8080:80 karljosebuena/ai-media-toy-robot-coding-challenge:latest` cmd from your terminal
 * open http://localhost:8080/ in your browser
-
-### Check Online (Deployed in Heroku)
-Goto https://ai-media-toy-robot-challenge.herokuapp.com/

@@ -60,6 +60,13 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  /**
+   * Dynamically generate our grids/table cell
+   * to be rendered in the UI on init
+   * @private
+   * @memberof AppComponent
+   */
   private initTableItems() {
     for (let y = 1; y <= this.tableHeight; y++) {
       let tableItemId = '';
@@ -75,6 +82,14 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  /**
+   * Responsible for marking robot's new position.
+   * This is called every time we set new starting position
+   * or every time to issue the 'Move', 'Left', or 'Right' command
+   * @private
+   * @memberof AppComponent
+   */
   private moveRobotToNewPosition() {
     const {
       positionX,
@@ -89,7 +104,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // remove robot's previous position
     this.clearRobotPreviousPosition();
 
-    // let's mark starting postion in tabletop
+    // let's mark new postion in tabletop
     let robotDirection = '';
     switch (startingDirection) {
       case 'North':
